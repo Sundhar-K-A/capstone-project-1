@@ -2,13 +2,20 @@ from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 
 
-# ---- Response ----
+class RetrievedChunk(BaseModel):
+    content: str
+    file_name: str
+    page_no: str
+    confidence: Optional[float] = None
+    tool_used: Optional[str] = None
+
 class QueryResponse(BaseModel):
     query: str
     answer: str
     policy_citations : str
     page_no: str
     document_name : str
+    retrieved_chunks: List[RetrievedChunk] = []
 
     
 class CustomerProfile(BaseModel):
