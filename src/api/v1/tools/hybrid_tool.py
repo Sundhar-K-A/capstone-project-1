@@ -1,7 +1,6 @@
 
 import json
 from langchain_core.tools import tool
-# We import the functions from the other two tools to reuse the logic for RRF
 from src.api.v1.tools.vector_tool import vector_search_tool
 from src.api.v1.tools.fts_tool import fts_search_tool
 

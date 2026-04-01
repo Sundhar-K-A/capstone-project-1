@@ -1,12 +1,3 @@
-# # import json
-# # from langchain_core.tools import tool
-# # from src.api.v1.services.query_service import fts_search
-
-# # @tool
-# # def fts_search_tool(query: str) -> str:
-# #     """Use this tool to perform a full-text exact keyword search. Best for policy codes, abbreviations, or IDs."""
-# #     return json.dumps(fts_search(query))
-
 import json
 import os
 import psycopg
@@ -18,41 +9,6 @@ load_dotenv()
 
 # Setup raw connection for direct SQL execution
 _raw_conn = os.getenv("PG_CONNECTION_STRING", "").replace("postgresql+psycopg", "postgresql")
-
-# @tool
-# def fts_search_tool(query: str) -> str:
-#     """
-#     ONLY use this tool for looking up technical IDs like 'POL-2024-HR' or 'ADV-992'. 
-#     Do NOT use this for full sentences or general questions.
-#     """
-#     sql = """
-#         SELECT
-#             e.document AS content,
-#             e.cmetadata AS metadata,
-#             ts_rank(to_tsvector('english', e.document), plainto_tsquery('english', %(query)s)) AS fts_rank
-#         FROM langchain_pg_embedding e
-#         JOIN langchain_pg_collection c ON c.uuid = e.collection_id
-#         WHERE c.name = 'retail_banking'
-#           AND to_tsvector('english', e.document) @@ plainto_tsquery('english', %(query)s)
-#         ORDER BY fts_rank DESC
-#         LIMIT 5;
-#     """
-    
-#     with psycopg.connect(_raw_conn, row_factory=dict_row) as conn:
-#         with conn.cursor() as cur:
-#             cur.execute(sql, {"query": query})
-#             rows = cur.fetchall()
-
-#     results = [
-#         {
-#             "content": row["content"],
-#             "metadata": row["metadata"],
-#             "fts_rank": round(float(row["fts_rank"]), 4),
-#         }
-#         for row in rows
-#     ]
-#     return json.dumps(results)
-
 
 @tool
 def fts_search_tool(query: str) -> str:
