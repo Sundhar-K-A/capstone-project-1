@@ -106,3 +106,7 @@ def ask_agent(query: str, session_id: str) -> dict:
             "page_no": "N/A",
             "document_name": "N/A"
         }
+    
+
+    git config --global user.email "karthick631746@gmail.com"
+    git config --global user.name "karthick631746"
