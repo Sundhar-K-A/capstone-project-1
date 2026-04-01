@@ -22,7 +22,7 @@ prompt = ChatPromptTemplate.from_messages([
     2. **VECTOR-SECOND (Semantic Mode)**: Use `vector_search_tool` only for broad goals or "feelings" (e.g., "I'm worried about the future") AFTER checking for specific terms.
     3. **QUERY ATOMICITY**: Never search using full sentences. Use 1-3 word queries ONLY (e.g., instead of "how to beat inflation," search "inflation risk").
     4. **STOP CONDITION**: If a tool returns specific data, STOP and synthesize the answer. Do not perform redundant searches.
-    ###STOP CONDITION
+    ###STOP CONDITION: 
     - If any tool returns relevant results:
     - STOP further searching
     - Generate final answer
