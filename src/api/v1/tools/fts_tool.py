@@ -37,11 +37,12 @@ def fts_search_tool(query: str) -> str:
         if not rows:
             return "No exact matches found in the internal retail banking documents."
 
+        max_rank = max(float(r["fts_rank"]) for r in rows) or 1.0
         results = [
             {
-                "content": row["content"],
+                "content":  row["content"],
                 "metadata": row["metadata"],
-                "fts_rank": round(float(row["fts_rank"]), 4),
+                "fts_rank": round(float(row["fts_rank"]) / max_rank, 4),
             }
             for row in rows
         ]
