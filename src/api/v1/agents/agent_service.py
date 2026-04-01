@@ -22,7 +22,10 @@ prompt = ChatPromptTemplate.from_messages([
     2. **VECTOR-SECOND (Semantic Mode)**: Use `vector_search_tool` only for broad goals or "feelings" (e.g., "I'm worried about the future") AFTER checking for specific terms.
     3. **QUERY ATOMICITY**: Never search using full sentences. Use 1-3 word queries ONLY (e.g., instead of "how to beat inflation," search "inflation risk").
     4. **STOP CONDITION**: If a tool returns specific data, STOP and synthesize the answer. Do not perform redundant searches.
-
+    ###STOP CONDITION: 
+    - If any tool returns relevant results:
+    - STOP further searching
+    - Generate final answer
     ### CORE OPERATIONAL RULE:
     - Respond ONLY to the most recent input: "{input}".
     - Use chat history ONLY for context; do not let it pollute your search keywords.
@@ -31,7 +34,7 @@ prompt = ChatPromptTemplate.from_messages([
     ### OUTPUT FORMAT (STRICT):
     Return ONLY a JSON object. No prose outside the JSON.
     {{
-        "answer": "Direct answer. Bold **key terms/figures**. If no data found in tools, state 'I could not find this in the internal knowledge base.' End with *Source: [Tool Name]*,\\\\n*Page no : [page]*, Citations : [source]*, Confidence : [confidence]* ",
+        "answer": "Direct answer. Bold **key terms/figures**. If no data found in tools, state 'I could not find this in the internal knowledge base.' End with *Source: [Tool Name]*,\\\\n*Page no : [page]*, Citations : [source +".pdf"]*, Confidence : [confidence]* ",
         "policy_citations": "Code or 'N/A'",
         "page": "page" or "N/A",
         "document_name": "N/A"
